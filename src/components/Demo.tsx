@@ -130,7 +130,7 @@ const Demo = () => {
             {/* Image with hotspots */}
             <div className="relative rounded-lg overflow-hidden border border-accent-cyan/20 shadow-2xl">
               <img
-                src="/interface.png"
+                src="./interface.png"
                 alt="SputnikSim Interface"
                 className="w-full block"
                 draggable={false}

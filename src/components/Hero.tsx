@@ -66,7 +66,7 @@ const Hero = () => {
           
           {/* Logo in center */}
           <div className="absolute w-32 h-32 rounded-full overflow-hidden border-2 border-accent-cyan/40 shadow-2xl shadow-accent-cyan/30 flex items-center justify-center bg-space-dark/80">
-            <img src="/logo.png" alt="SputnikSim" className="w-full h-full object-cover" />
+            <img src="./logo.png" alt="SputnikSim" className="w-full h-full object-cover" />
           </div>
 
           {/* Satellite dot */}
