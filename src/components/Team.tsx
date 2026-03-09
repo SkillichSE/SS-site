@@ -144,7 +144,7 @@ const Team = () => {
                 </button>
               </div>
               <video
-                src="/rick.mp4"
+                src="./rick.mp4"
                 autoPlay
                 controls
                 className="w-full block"
