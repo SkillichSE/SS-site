@@ -1,40 +1,27 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Problem = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const problems = [
-    {
-      title: 'Высокая стоимость ошибки',
-      description: 'Потеря KazSat-1 обошлась в $65 млн и 2 года судебных разбирательств со страховщиками.',
-    },
-    {
-      title: 'Нехватка опытных кадров',
-      description: 'Учиться на реальных спутниках — значит рисковать ими. Система подготовки специалистов только формируется.',
-    },
-    {
-      title: 'Сложность прогнозирования',
-      description: 'Инцидент с KazSat-3: прогнозируемое явление привело к отключению связи по всей стране.',
-    },
-  ]
+  const { t } = useLanguage()
 
   return (
-    <section id="about" ref={ref} className="py-32 px-6 relative z-10">
+    <section id="about" ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          Проблема
+          {t.problem.title}
         </motion.h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {problems.map((problem, index) => (
+          {t.problem.items.map((problem, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}

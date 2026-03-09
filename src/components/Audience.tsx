@@ -1,51 +1,29 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Audience = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
 
   const audiences = [
-    {
-      title: 'Вузы',
-      items: [
-        'Satbayev University',
-        'Евразийский национальный университет',
-        'КазНУ им. аль-Фараби',
-        'Подготовка инженеров-баллистиков',
-      ],
-    },
-    {
-      title: 'Операторы спутников',
-      items: [
-        'РЦКС (управление KazSat)',
-        'Обучение персонала',
-        'Снижение рисков',
-        'Отработка сценариев',
-      ],
-    },
-    {
-      title: 'Школы и кружки',
-      items: [
-        'Дополнительное образование',
-        'Молодёжные космические лаборатории',
-        'Профориентация',
-        'Доступно школьникам',
-      ],
-    },
+    { title: t.audience.universities, items: t.audience.items.universities },
+    { title: t.audience.operators, items: t.audience.items.operators },
+    { title: t.audience.schools, items: t.audience.items.schools },
   ]
 
   return (
-    <section ref={ref} className="py-32 px-6 relative z-10">
+    <section ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          Для кого
+          {t.audience.title}
         </motion.h2>
 
         <div className="grid md:grid-cols-3 gap-8">

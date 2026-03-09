@@ -1,21 +1,23 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Comparison = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const { t } = useLanguage()
 
   return (
-    <section id="comparison" ref={ref} className="py-32 px-6 relative z-10">
+    <section id="comparison" ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          Сравнение с конкурентами
+          {t.comparison.title}
         </motion.h2>
 
         <motion.div
@@ -27,48 +29,48 @@ const Comparison = () => {
           <table className="w-full bg-space-secondary rounded-lg overflow-hidden">
             <thead className="bg-space-tertiary">
               <tr>
-                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">Критерий</th>
-                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">STK (Ansys)</th>
-                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">GMAT (NASA)</th>
-                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">Обучение на месте</th>
-                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">SputnikSim</th>
+                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">{t.comparison.criterion}</th>
+                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">{t.comparison.stk}</th>
+                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">{t.comparison.gmat}</th>
+                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">{t.comparison.onSiteTraining}</th>
+                <th className="px-6 py-4 text-left font-orbitron text-sm text-accent-cyan border-b border-accent-cyan/10">{t.comparison.sputniksim}</th>
               </tr>
             </thead>
             <tbody>
               <tr className="hover:bg-accent-cyan/5 transition-colors">
-                <td className="px-6 py-4 border-b border-accent-cyan/10">Стоимость лицензии</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">$15-50k/год</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Бесплатно</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">$50-150k/оператор</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">$2-5k/год для вуза</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10">{t.comparison.licenseCost}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.license[0]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.license[1]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.license[2]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.license[3]}</td>
               </tr>
               <tr className="hover:bg-accent-cyan/5 transition-colors">
-                <td className="px-6 py-4 border-b border-accent-cyan/10">Скрытые затраты</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Обучение $5-20k</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Разработка сценариев</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Риск потери спутника</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Минимальны</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10">{t.comparison.hiddenCosts}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.hidden[0]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.hidden[1]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.hidden[2]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.hidden[3]}</td>
               </tr>
               <tr className="hover:bg-accent-cyan/5 transition-colors">
-                <td className="px-6 py-4 border-b border-accent-cyan/10">Сложность</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Очень высокая</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Требует программирования</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Только для избранных</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Понятно новичку</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10">{t.comparison.complexity}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.complexity[0]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.complexity[1]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.complexity[2]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.complexity[3]}</td>
               </tr>
               <tr className="hover:bg-accent-cyan/5 transition-colors">
-                <td className="px-6 py-4 border-b border-accent-cyan/10">ИИ-анализ</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Нет</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Нет</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Только опыт</td>
-                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">Да (Vega 1.0)</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10">{t.comparison.aiAnalysis}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.no}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.no}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.ai[2]}</td>
+                <td className="px-6 py-4 border-b border-accent-cyan/10 text-gray-400">{t.comparison.values.ai[3]}</td>
               </tr>
               <tr className="bg-accent-cyan/10 border-2 border-accent-cyan hover:bg-accent-cyan/20 transition-colors">
-                <td className="px-6 py-4 font-semibold">Доступно школьникам</td>
-                <td className="px-6 py-4 font-semibold text-gray-400">Нет</td>
-                <td className="px-6 py-4 font-semibold text-gray-400">Нет</td>
-                <td className="px-6 py-4 font-semibold text-gray-400">Нет</td>
-                <td className="px-6 py-4 font-semibold text-accent-cyan">Да</td>
+                <td className="px-6 py-4 font-semibold">{t.comparison.schoolAccess}</td>
+                <td className="px-6 py-4 font-semibold text-gray-400">{t.comparison.no}</td>
+                <td className="px-6 py-4 font-semibold text-gray-400">{t.comparison.no}</td>
+                <td className="px-6 py-4 font-semibold text-gray-400">{t.comparison.no}</td>
+                <td className="px-6 py-4 font-semibold text-accent-cyan">{t.comparison.yes}</td>
               </tr>
             </tbody>
           </table>
