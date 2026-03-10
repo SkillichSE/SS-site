@@ -1,51 +1,70 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
+
+const RICK_SEQUENCE = ['Хлызов Максим', 'Андин Артём', 'Гончар Фёдор']
 
 const Team = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const { t } = useLanguage()
-  const rickSequence = t.team.rickSequence
   const [rickStep, setRickStep] = useState(0)
   const [rickOpen, setRickOpen] = useState(false)
 
-  const team = t.team.members
-  const linkedIndex = 2
+  const team = [
+    {
+      name: 'Хлызов Максим',
+      role: 'Капитан, Физик',
+      description: 'Архитектура системы и физическая модель',
+    },
+    {
+      name: 'Гончар Фёдор',
+      role: 'Frontend',
+      description: 'Интерфейс на PyQt5 и визуализация',
+    },
+    {
+      name: 'Волочай Даниил',
+      role: 'Backend и AI',
+      description: 'Нейросеть Vega 1.0 и обработка данных',
+    },
+    {
+      name: 'Андин Артём',
+      role: 'Маркетинг',
+      description: 'Документация и развитие продукта',
+    },
+  ]
 
   const handleCardClick = (name: string) => {
-    const idx = team.findIndex(m => m.name === name)
-    if (idx === linkedIndex) return
-    if (name === rickSequence[rickStep]) {
+    if (name === 'Волочай Даниил') return
+    if (name === RICK_SEQUENCE[rickStep]) {
       const next = rickStep + 1
-      if (next === rickSequence.length) {
+      if (next === RICK_SEQUENCE.length) {
         setRickStep(0)
         setRickOpen(true)
       } else {
         setRickStep(next)
       }
     } else {
-      setRickStep(name === rickSequence[0] ? 1 : 0)
+      // wrong order — reset, check if this click starts a new sequence
+      setRickStep(name === RICK_SEQUENCE[0] ? 1 : 0)
     }
   }
 
   return (
-    <section id="team" ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
+    <section id="team" ref={ref} className="py-32 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          {t.team.title}
+          Команда RUDnik
         </motion.h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {team.map((member, index) => {
-            const isLinked = index === linkedIndex
-            const stepIndex = (rickSequence as readonly string[]).indexOf(member.name)
+            const isLinked = member.name === 'Волочай Даниил'
+            const stepIndex = RICK_SEQUENCE.indexOf(member.name)
             const isActivated = stepIndex !== -1 && stepIndex < rickStep
 
             const cardContent = (
@@ -94,6 +113,7 @@ const Team = () => {
         </div>
       </div>
 
+      {/* Rick player overlay */}
       <AnimatePresence>
         {rickOpen && (
           <motion.div
@@ -111,6 +131,7 @@ const Team = () => {
               className="relative w-full max-w-3xl mx-4 rounded-xl overflow-hidden border-2 border-accent-cyan shadow-2xl shadow-accent-cyan/30"
               onClick={e => e.stopPropagation()}
             >
+              {/* Title bar */}
               <div className="bg-space-tertiary px-5 py-3 flex items-center justify-between border-b border-accent-cyan/20">
                 <span className="font-orbitron text-sm text-accent-cyan tracking-widest">
                   🛰 SYSTEM OVERRIDE — RUDNIK CLASSIFIED
@@ -123,7 +144,7 @@ const Team = () => {
                 </button>
               </div>
               <video
-                src="./rick.mp4"
+                src="/rick.mp4"
                 autoPlay
                 controls
                 className="w-full block"

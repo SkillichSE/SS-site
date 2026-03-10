@@ -1,23 +1,28 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 
 const Vega = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const { t } = useLanguage()
+
+  const metrics = [
+    { value: '91.3%', label: 'Классификация спутник/мусор' },
+    { value: '81.8%', label: 'Детекция аномалий' },
+    { value: 'F1 85%', label: 'Точность и полнота' },
+    { value: '12,872', label: 'Записей в датасете' },
+  ]
 
   return (
-    <section id="technology" ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
+    <section id="technology" ref={ref} className="py-32 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          {t.vega.title}
+          Vega 1.0: Нейросетевой анализ
         </motion.h2>
 
         <motion.div
@@ -28,32 +33,33 @@ const Vega = () => {
         >
           <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
             <div className="bg-space-tertiary px-6 py-4 rounded border border-accent-cyan/30 font-mono text-center flex-1 min-w-[100px]">
-              {t.vega.input}
+              Вход<br/>(параметры орбиты)
             </div>
             <div className="text-accent-cyan text-3xl">→</div>
             <div className="bg-space-tertiary px-6 py-4 rounded border border-accent-cyan/30 font-mono text-center flex-1 min-w-[100px]">
-              {t.vega.encoder}
+              Encoder<br/>(сжатие)
             </div>
             <div className="text-accent-cyan text-3xl">→</div>
             <div className="bg-space-tertiary px-6 py-4 rounded border border-accent-cyan/30 font-mono text-center flex-1 min-w-[100px]">
-              {t.vega.latent}
+              Latent<br/>(скрытое представление)
             </div>
             <div className="text-accent-cyan text-3xl">→</div>
             <div className="bg-space-tertiary px-6 py-4 rounded border border-accent-cyan/30 font-mono text-center flex-1 min-w-[100px]">
-              {t.vega.decoder}
+              Decoder<br/>(восстановление)
             </div>
             <div className="text-accent-cyan text-3xl">→</div>
             <div className="bg-space-tertiary px-6 py-4 rounded border border-accent-cyan/30 font-mono text-center flex-1 min-w-[100px]">
-              {t.vega.error}
+              Ошибка<br/>= Аномалия
             </div>
           </div>
           <p className="text-gray-400 text-center">
-            {t.vega.description}
+            Архитектура autoencoder (PyTorch) обучена восстанавливать входные орбитальные параметры. 
+            Аномальные объекты показывают высокую ошибку восстановления.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {t.vega.metrics.map((metric, index) => (
+          {metrics.map((metric, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -75,7 +81,7 @@ const Vega = () => {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="text-gray-400 text-center"
         >
-          {t.vega.validation}
+          Валидация на 516 реальных объектах, включая фрагменты разрушений Cosmos-1408 и Fengyun-1C
         </motion.p>
       </div>
     </section>

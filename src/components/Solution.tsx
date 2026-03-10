@@ -1,27 +1,34 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 
 const Solution = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const { t } = useLanguage()
+
+  const features = [
+    { icon: '🛰️', title: 'Загрузка спутников по NORAD ID', desc: '14 000+ спутников из каталога Celestrak' },
+    { icon: '🧠', title: 'ИИ-анализ аномалий', desc: 'Нейросеть Vega 1.0 с точностью 91.3%' },
+    { icon: '⚙️', title: 'Коррекция орбиты', desc: 'Delta-V бюджет и симуляция манёвров' },
+    { icon: '📊', title: 'Симуляция траектории', desc: 'Физика SGP4, ускоренное время' },
+    { icon: '🔴', title: 'Живое отслеживание', desc: 'Обновление позиции каждые 30 секунд' },
+    { icon: '💻', title: 'Работает на обычном ПК', desc: 'Не требует дорогостоящего оборудования' },
+  ]
 
   return (
-    <section ref={ref} className="py-16 md:py-32 px-4 md:px-6 relative z-10">
+    <section ref={ref} className="py-32 px-6 relative z-10">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="font-orbitron text-3xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
+          className="font-orbitron text-5xl font-bold text-center mb-16 bg-gradient-to-r from-accent-silver to-accent-blue bg-clip-text text-transparent"
         >
-          {t.solution.title}
+          Решение
         </motion.h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {t.solution.items.map((feature, index) => (
+          {features.map((feature, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
