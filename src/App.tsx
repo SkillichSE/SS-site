@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
