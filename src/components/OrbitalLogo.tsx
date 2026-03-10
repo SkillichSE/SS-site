@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react'
 
+import logoUrl from '/public/logo.png'
+
 const OrbitalLogo = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const angleRef = useRef(0)
@@ -8,7 +10,7 @@ const OrbitalLogo = () => {
 
   useEffect(() => {
     const img = new Image()
-    img.src = './logo.png'
+    img.src = logoUrl
     img.onload = () => { imgRef.current = img }
     imgRef.current = img
   }, [])

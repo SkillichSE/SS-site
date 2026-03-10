@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
+import rickVideo from '/public/rick.mp4'
 
 const RICK_SEQUENCE = ['Хлызов Максим', 'Андин Артём', 'Гончар Фёдор']
 
@@ -144,7 +145,7 @@ const Team = () => {
                 </button>
               </div>
               <video
-                src="/rick.mp4"
+                src={rickVideo}
                 autoPlay
                 controls
                 className="w-full block"

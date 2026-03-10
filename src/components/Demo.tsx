@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
+import interfaceImg from '/public/interface.png'
 
 const hotspots = [
   {
@@ -130,7 +131,7 @@ const Demo = () => {
             {/* Image with hotspots */}
             <div className="relative rounded-lg overflow-hidden border border-accent-cyan/20 shadow-2xl">
               <img
-                src="/interface.png"
+                src={interfaceImg}
                 alt="SputnikSim Interface"
                 className="w-full block"
                 draggable={false}
